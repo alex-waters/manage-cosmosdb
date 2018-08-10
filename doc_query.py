@@ -8,10 +8,13 @@ client = document_client.DocumentClient(
     {'masterKey': connection['MASTERKEY']}
 )
 
+# this query will return dates where coal was above 1%
 query = {'query': '''
-    SELECT * 
-    FROM server s 
-    WHERE s.id = '2018-08-09T12:30Z'
+    SELECT t.id
+    FROM things t
+    WHERE 
+        --t.id = '2018-08-09T12:30Z'
+        t.data.data.generationmix[1].perc > 1
     '''
 }
 
